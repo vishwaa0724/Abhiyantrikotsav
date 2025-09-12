@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Events | Abhiyantrikotsav</title>
+    <!-- Favicon -->
+    <link rel="icon" href="WhatsApp_Image_2025-08-28_at_18.00.19_71f4080f-removebg-preview.png" type="image/jpeg">
+    <!-- Tailwind CSS for styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Orbitron for headings, Inter for body -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Orbitron:wght@700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --glow-color: hsl(185, 95%, 50%);
+        }
+        html {
+            scroll-behavior: smooth;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #020617;
+            overflow-x: hidden;
+        }
+        h1, h2, h3 {
+            font-family: 'Orbitron', sans-serif;
+            text-shadow: 0 0 10px rgba(6, 182, 212, 0.5), 0 0 20px rgba(6, 182, 212, 0.3);
+        }
+        .glass-card {
+            background: rgba(15, 23, 42, 0.5);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(100, 220, 255, 0.2);
+            border-radius: 1.5rem;
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .glass-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 12px 40px 0 rgba(0, 183, 255, 0.2);
+        }
+        .cta-button {
+            position: relative;
+            border: 2px solid var(--glow-color);
+            color: white;
+            text-shadow: 0 0 5px var(--glow-color);
+            box-shadow: inset 0 0 0.8em 0 var(--glow-color), 0 0 0.8em 0 var(--glow-color);
+            transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+        .cta-button:hover:not(:disabled) {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: inset 0 0 0 0 var(--glow-color), 0 0 2em 0 var(--glow-color);
+        }
+        .operation-card {
+            border-color: rgba(239, 68, 68, 0.4); /* Red border color */
+        }
+        .operation-card .info-button {
+             --glow-color: hsl(0, 84%, 60%); /* A vibrant red */
+            border-color: var(--glow-color);
+            text-shadow: 0 0 5px var(--glow-color);
+            box-shadow: inset 0 0 0.8em 0 var(--glow-color), 0 0 0.8em 0 var(--glow-color);
+        }
+    </style>
+</head>
+<body class="text-gray-200">
+
+    <canvas id="particle-canvas" class="fixed top-0 left-0 w-full h-full z-0 opacity-40"></canvas>
+
+    <div class="relative z-10">
+        <!-- Header Navigation -->
+        <nav class="fixed top-0 left-0 right-0 z-50">
+            <div class="container mx-auto px-4">
+                <div class="glass-card flex items-center justify-between my-4 px-6 py-3 rounded-full">
+                    <a href="./index.html" aria-label="Back to Abhiyantrikotsav Homepage">
+                        <img src="WhatsApp_Image_2025-08-28_at_18.00.19_71f4080f-removebg-preview.png" alt="Abhiyantrikotsav 2k25 Logo" class="h-10 w-auto">
+                    </a>
+                    <a href="./index.html" class="cta-button inline-flex items-center gap-2 bg-transparent font-semibold text-md py-2 px-6 rounded-full">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="transition-transform group-hover:-translate-x-1"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+                        Home
+                    </a>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="container mx-auto px-4 pt-40 pb-24">
+            <header class="text-center mb-16">
+                <h1 class="text-5xl md:text-7xl font-black tracking-tighter uppercase">Events</h1>
+                <p class="mt-4 text-xl text-cyan-200/80 max-w-2xl mx-auto">Compete, Learn, and Innovate.</p>
+            </header>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+
+                <!-- Event Card 6: Open Stage -->
+                <div class="glass-card p-8 flex flex-col items-center text-center">
+                     <div class="p-4 bg-cyan-900/50 rounded-full mb-4 border border-cyan-500/30">
+                       <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-cyan-300"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3Z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="23"/><line x1="8" y1="23" x2="16" y2="23"/></svg>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-2 text-white">Open Stage</h3>
+                    <p class="text-gray-400 mb-6 flex-grow">The stage is yours! Showcase your talents in singing, dancing, stand-up, or any performance art.</p>
+                    <a href="https://docs.google.com/forms/d/e/1FAIpQLSdfKWBs54OkriO1QHdWziu8BPfJi_6Cvi-gUq5skGino7A9tw/viewform?usp=header" class="cta-button w-full text-center font-bold text-lg py-3 px-8 rounded-full">Register Now</a>
+                </div>
+
+                <!-- Event Card 2: Ramp Walk -->
+                <div class="glass-card p-8 flex flex-col items-center text-center">
+                     <div class="p-4 bg-cyan-900/50 rounded-full mb-4 border border-cyan-500/30">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-cyan-300">
+                           <circle cx="12" cy="5" r="3"></circle>
+                           <path d="M12 8v11"></path>
+                           <path d="M5.5 10.5 12 13l6.5-2.5"></path>
+                           <path d="m12 19-3 3"></path>
+                           <path d="m12 19 3 3"></path>
+                        </svg>
+                     </div>
+                    <h3 class="text-2xl font-bold mb-2 text-white">Ramp Walk</h3>
+                    <p class="text-gray-400 mb-6 flex-grow">Unleash your creativity and style on the runway. A fusion of fashion, technology, and entertainment.</p>
+                    <a href="https://docs.google.com/forms/d/e/1FAIpQLSdP5uYxAvWbVLmH5daohaRQC5NPYFanNM79brKSob6zUmb5ag/viewform" class="cta-button w-full text-center font-bold text-lg py-3 px-8 rounded-full">Register Now</a>
+                </div>
+                
+                <!-- Event Card 5: Code Quest -->
+                <div class="glass-card p-8 flex flex-col items-center text-center">
+                     <div class="p-4 bg-cyan-900/50 rounded-full mb-4 border border-cyan-500/30">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-cyan-300"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-2 text-white">Code Quest</h3>
+                    <p class="text-gray-400 mb-6 flex-grow">Test your coding acumen in this fast-paced quiz. Solve problems, debug challenges, and prove your programming prowess.</p>
+                    <a href="https://forms.gle/zhgNxEHa7GsvG7EX6" class="cta-button w-full text-center font-bold text-lg py-3 px-8 rounded-full">Register Now</a>
+                </div>
+
+                <!-- Event Card 4: Hackathon -->
+                <div class="glass-card p-8 flex flex-col items-center text-center">
+                     <div class="p-4 bg-cyan-900/50 rounded-full mb-4 border border-cyan-500/30">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-cyan-300"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path></svg>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-2 text-white">Hackathon</h3>
+                    <p class="text-gray-400 mb-6 flex-grow">A marathon of innovation. Collaborate, code, and create solutions to real-world challenges in a high-energy environment.</p>
+                    <a href="https://forms.gle/ZLwoYWju2HNpuUDU8" class="cta-button w-full text-center font-bold text-lg py-3 px-8 rounded-full">Register Now</a>
+                </div>
+
+                <!-- Event Card 7: Escape Room -->
+                <div class="glass-card p-8 flex flex-col items-center text-center">
+                     <div class="p-4 bg-cyan-900/50 rounded-full mb-4 border border-cyan-500/30">
+                       <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-cyan-300"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-2 text-white">Escape Room</h3>
+                    <p class="text-gray-400 mb-6 flex-grow">Solve cryptic puzzles, uncover hidden clues, and work as a team to break out before time runs out. A thrilling test of your wits.</p>
+                    <a href="https://docs.google.com/forms/d/e/1FAIpQLSdW74tVX5jArmApd_-JyXVunTAuGdDkCwnnvOFX7fGDr0URhQ/viewform
+                    " class="cta-button w-full text-center font-bold text-lg py-3 px-8 rounded-full">Register Now</a>
+                </div>
+
+                <!-- Event Card 3: Exciting Games -->
+                <div class="glass-card p-8 flex flex-col items-center text-center">
+                     <div class="p-4 bg-cyan-900/50 rounded-full mb-4 border border-cyan-500/30">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-cyan-300">
+                           <circle cx="12" cy="12" r="10"></circle>
+                           <polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"></polygon>
+                           <line x1="12" y1="22" x2="12" y2="15.88"></line>
+                           <line x1="3.27" y1="10.5" x2="8.13" y2="12.37"></line>
+                           <line x1="16.24" y1="7.76" x2="20.73" y2="9.5"></line>
+                       </svg>
+                     </div>
+                    <h3 class="text-2xl font-bold mb-2 text-white">Exciting Games</h3>
+                    <p class="text-gray-400 mb-6 flex-grow">Take a break and dive into a world of fun! Join us for a variety of engaging games and win amazing prizes.</p>
+                    <button disabled class="cta-button w-full text-center font-bold text-lg py-3 px-8 rounded-full opacity-70 cursor-not-allowed">Spot Registration</button>
+                </div>
+
+                <div class="glass-card operation-card p-8 md:p-12 md:col-span-2 lg:col-span-3">
+                     <div class="md:grid md:grid-cols-2 md:gap-12 items-center">
+                        <img src="ops.jpg" alt="Operation Sindhoor Logo" class="rounded-lg shadow-lg mb-8 md:mb-0 w-full max-w-xs mx-auto object-cover">
+                        <div class="text-center">
+                            <h3 class="text-3xl font-bold mb-6 text-white">Operation Sindhoor</h3>
+                            <p class="info-button w-full text-center font-bold text-lg py-4 px-6 rounded-lg opacity-90 cursor-default">
+                                Ready to Explore glimpses of <span class="font-bold">Operation Sindhoor</span> at School of Engineering as part of the Abhiyantrikotsav 2K25
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </main>
+
+        <!-- Footer -->
+        <footer class="border-t border-slate-700/50 mt-8">
+            <div class="container mx-auto text-center px-6 py-8">
+                <p class="text-gray-500">&copy; 2025 School of Engineering, <br>Central University of Karnataka. All Rights Reserved.<br> Website created and maintained by Vishwaa J, ECE Dept.</p>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        // --- Particle System Logic ---
+        const canvas = document.getElementById('particle-canvas');
+        const ctx = canvas.getContext('2d');
+        let particles = [];
+        let particleCount = window.innerWidth < 768 ? 60 : 100;
+
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            particleCount = window.innerWidth < 768 ? 60 : 100;
+        }
+
+        class Particle {
+            constructor(x, y, size, speedX, speedY) {
+                this.x = x; this.y = y; this.size = size;
+                this.speedX = speedX; this.speedY = speedY;
+            }
+            update() {
+                if (this.x > canvas.width || this.x < 0) this.speedX *= -1;
+                if (this.y > canvas.height || this.y < 0) this.speedY *= -1;
+                this.x += this.speedX; this.y += this.speedY;
+            }
+            draw() {
+                ctx.fillStyle = 'rgba(6, 182, 212, 0.8)';
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fill();
+            }
+        }
+
+        function createParticles() {
+            particles = [];
+            for (let i = 0; i < particleCount; i++) {
+                const size = Math.random() * 1.5 + 1;
+                const x = Math.random() * canvas.width;
+                const y = Math.random() * canvas.height;
+                const speedX = Math.random() * 0.5 - 0.25;
+                const speedY = Math.random() * 0.5 - 0.25;
+                particles.push(new Particle(x, y, size, speedX, speedY));
+            }
+        }
+
+        function animate() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            for (let i = 0; i < particles.length; i++) {
+                particles[i].update();
+                particles[i].draw();
+                for (let j = i; j < particles.length; j++) {
+                    const dx = particles[i].x - particles[j].x;
+                    const dy = particles[i].y - particles[j].y;
+                    const distance = Math.sqrt(dx * dx + dy * dy);
+                    if (distance < 120) {
+                        ctx.beginPath();
+                        ctx.strokeStyle = `rgba(6, 182, 212, ${1 - distance / 120})`;
+                        ctx.lineWidth = 0.5;
+                        ctx.moveTo(particles[i].x, particles[i].y);
+                        ctx.lineTo(particles[j].x, particles[j].y);
+                        ctx.stroke();
+                        ctx.closePath();
+                    }
+                }
+            }
+            requestAnimationFrame(animate);
+        }
+
+        window.addEventListener('resize', () => {
+            resizeCanvas();
+            createParticles();
+        });
+
+        resizeCanvas();
+        createParticles();
+        animate();
+    </script>
+</body>
+</html>
+

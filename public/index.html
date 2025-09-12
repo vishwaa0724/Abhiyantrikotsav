@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Abhiyantrikotsav | CUK School of Engineering</title>
+    <!-- Favicon -->
+    <link rel="icon" href="WhatsApp_Image_2025-08-28_at_18.00.19_71f4080f-removebg-preview.png" type="image/jpeg">
+    <!-- Tailwind CSS for styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Orbitron for headings, Inter for body -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Orbitron:wght@700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --glow-color: hsl(185, 95%, 50%);
+        }
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: 6rem; /* Prevents fixed header from overlapping content on anchor links */
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #020617; /* Even darker slate for depth */
+            overflow-x: hidden; /* Prevent horizontal scroll */
+        }
+
+        h1, h2, h3 {
+            font-family: 'Orbitron', sans-serif;
+            text-shadow: 0 0 10px rgba(6, 182, 212, 0.5), 0 0 20px rgba(6, 182, 212, 0.3);
+        }
+
+        /* Glassmorphism Card Style */
+        .glass-card {
+            background: rgba(15, 23, 42, 0.5); /* Semi-transparent slate */
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(100, 220, 255, 0.2);
+            border-radius: 1.5rem; /* More rounded */
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+            transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+        }
+        .glass-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 40px 0 rgba(0, 0, 0, 0.45);
+        }
+
+        /* Next-level CTA button */
+        .cta-button {
+            position: relative;
+            border: 2px solid var(--glow-color);
+            color: white;
+            text-shadow: 0 0 5px var(--glow-color);
+            box-shadow: inset 0 0 1em 0 var(--glow-color), 0 0 1.5em 0 var(--glow-color);
+            transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+        .cta-button:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: inset 0 0 0 0 var(--glow-color), 0 0 2.5em 0 var(--glow-color);
+        }
+    </style>
+</head>
+<body class="text-gray-200">
+
+    <canvas id="particle-canvas" class="fixed top-0 left-0 w-full h-full z-0 opacity-40"></canvas>
+    
+    <!-- Main container to stack content on top -->
+    <div class="relative z-10">
+        <!-- Header Navigation -->
+        <nav id="navbar" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300">
+             <div class="container mx-auto px-4">
+                <div class="glass-card flex items-center justify-between my-4 px-6 py-3 rounded-full">
+                    <a href="#" aria-label="Abhiyantrikotsav Homepage">
+                        <img src="WhatsApp_Image_2025-08-28_at_18.00.19_71f4080f-removebg-preview.png" alt="Abhiyantrikotsav 2k25 Logo" class="h-10 w-auto">
+                    </a>
+                    <div class="hidden md:flex items-center space-x-6">
+                        <a href="#about" class="text-gray-300 hover:text-cyan-400 transition-colors" data-key="navAbout">About</a>
+                        <a href="./events.html" class="text-gray-300 hover:text-cyan-400 transition-colors" data-key="navEvents">Events</a>
+                         <!-- Language Dropdown -->
+                        <div class="relative" id="lang-dropdown-container">
+                            <button id="lang-dropdown-btn" class="flex items-center text-gray-300 hover:text-cyan-400 transition-colors">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
+                            </button>
+                            <div id="lang-dropdown-menu" class="hidden absolute right-0 mt-4 w-36 glass-card !rounded-2xl py-2">
+                                <a href="#" class="block px-4 py-2 text-sm text-gray-300 hover:bg-slate-700/50" data-lang="en">English</a>
+                                <a href="#" class="block px-4 py-2 text-sm text-gray-300 hover:bg-slate-700/50" data-lang="ta">தமிழ்</a>
+                                <a href="#" class="block px-4 py-2 text-sm text-gray-300 hover:bg-slate-700/50" data-lang="ml">മലയാളം</a>
+                                <a href="#" class="block px-4 py-2 text-sm text-gray-300 hover:bg-slate-700/50" data-lang="te">తెలుగు</a>
+                                <a href="#" class="block px-4 py-2 text-sm text-gray-300 hover:bg-slate-700/50" data-lang="kn">ಕನ್ನಡ</a>
+                                <a href="#" class="block px-4 py-2 text-sm text-gray-300 hover:bg-slate-700/50" data-lang="hi">हिन्दी</a>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Mobile Menu Button -->
+                    <button id="menu-btn" class="md:hidden block text-white focus:outline-none">
+                        <svg id="menu-open-icon" xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+                        <svg id="menu-close-icon" xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="hidden"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                    </button>
+                </div>
+                <!-- Mobile Menu -->
+                <div id="mobile-menu" class="hidden md:hidden glass-card rounded-2xl text-center mt-2">
+                    <a href="#about" class="block py-3 px-4 text-gray-300 hover:text-cyan-400 transition-colors" data-key="navAbout">About</a>
+                    <a href="./events.html" class="block py-3 px-4 text-gray-300 hover:text-cyan-400 transition-colors" data-key="navEvents">Events</a>
+                    <div class="border-t border-slate-700/50 my-1 mx-4"></div>
+                    <a href="#" class="block py-2 px-4 text-gray-300 hover:text-cyan-400 transition-colors" data-lang="en">English</a>
+                    <a href="#" class="block py-2 px-4 text-gray-300 hover:text-cyan-400 transition-colors" data-lang="ta">தமிழ்</a>
+                    <a href="#" class="block py-2 px-4 text-gray-300 hover:text-cyan-400 transition-colors" data-lang="ml">മലയാളം</a>
+                    <a href="#" class="block py-2 px-4 text-gray-300 hover:text-cyan-400 transition-colors" data-lang="te">తెలుగు</a>
+                    <a href="#" class="block py-2 px-4 text-gray-300 hover:text-cyan-400 transition-colors" data-lang="kn">ಕನ್ನಡ</a>
+                    <a href="#" class="block py-2 px-4 text-gray-300 hover:text-cyan-400 transition-colors" data-lang="hi">हिन्दी</a>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Hero Section -->
+        <header class="text-white min-h-screen flex items-center justify-center text-center">
+            <div class="container mx-auto px-6 py-24">
+                <img src="WhatsApp_Image_2025-08-28_at_18.00.19_71f4080f-removebg-preview.png" alt="Abhiyantrikotsav 2k25 Logo" class="h-32 w-auto mx-auto mb-8">
+                <h1 class="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-black tracking-tighter uppercase" data-key="heroTitle">Abhiyantrikotsav</h1>
+                <h2 class="mt-4 text-xl md:text-2xl font-bold text-cyan-300" data-key="heroSubTitle">
+                    School of Engineering, Central University of Karnataka
+                </h2>
+                <p class="mt-6 text-lg md:text-xl text-cyan-100/80 max-w-3xl mx-auto font-light" data-key="heroDescription">
+                    A convergence of circuits and systems, where innovation in Electrical and Electronics Engineering sparks to life.
+                </p>
+                <!-- Date and Venue Information -->
+                <div class="mt-10 flex flex-col md:flex-row items-center justify-center gap-6 md:gap-12">
+                    <div class="flex items-center gap-3">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-cyan-300"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+                        <span class="text-xl font-semibold text-white" data-key="festDates">September 15th - 19th</span>
+                    </div>
+                    <div class="flex items-center gap-3">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-cyan-300"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                        <span class="text-xl font-semibold text-white" data-key="festVenue">Venue: School Of Engineering, CUK</span>
+                    </div>
+                </div>
+                <div class="mt-12">
+                    <a href="./events.html" class="cta-button inline-flex items-center gap-2 bg-transparent font-semibold text-lg py-3 px-8 rounded-full" data-key="ctaButtonHero">
+                        Explore Events
+                        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="transition-transform group-hover:translate-x-1"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                    </a>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="container mx-auto px-6 py-16 space-y-24">
+            <!-- About Section -->
+            <section id="about" class="glass-card p-8 md:p-12">
+                <div class="text-center">
+                    <h2 class="text-3xl md:text-4xl font-bold text-white mb-2" data-key="aboutTitle">About <span class="text-cyan-400">Abhiyantrikotsav</span></h2>
+                    <p class="text-lg text-cyan-200/80 mb-8 max-w-4xl mx-auto" data-key="aboutSubTitle">The annual technical fest of the School of Engineering,<br> Central University of Karnataka</p>
+                </div>
+
+                <div class="text-gray-300 max-w-4xl mx-auto text-lg space-y-4 text-left md:text-center leading-relaxed">
+                    <p data-key="aboutPara1">
+                        <strong>Abhiyantrikotsav</strong> is the annual technical fest of the School of Engineering, Central University of Karnataka — where <em>innovation meets creativity</em> and <em>knowledge meets fun</em>. It is a vibrant platform that brings together the students of our university to celebrate the spirit of engineering and technology.
+                    </p>
+                    <p data-key="aboutPara2">
+                        With a diverse range of <strong>competitions, workshops, hackathons, technical talks,</strong> and <strong>cultural showcases</strong>, Abhiyantrikotsav aims to foster problem-solving, critical thinking, and teamwork among participants. The fest not only encourages technical excellence but also provides a stage for budding engineers to explore new horizons, exchange ideas, and transform concepts into impactful solutions.
+                    </p>
+                </div>
+
+                <!-- Highlights List -->
+                <ul class="mt-8 max-w-3xl mx-auto grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-4 text-lg text-gray-200">
+                    <li class="flex items-center gap-3">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="text-cyan-400"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>
+                        <span data-key="highlight1">Hackathons & Coding Battles</span>
+                    </li>
+                    <li class="flex items-center gap-3">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="text-cyan-400"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path></svg>
+                        <span data-key="highlight2">Hands-on Workshops</span>
+                    </li>
+                    <li class="flex items-center gap-3">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="text-cyan-400"><path d="M12 8V4H8"/><rect x="4" y="12" width="8" height="8" rx="2"/><path d="M8 12v-2a2 2 0 1 1 4 0v2"/></svg>
+                        <span data-key="highlight3">Technical Talks & Presentations</span>
+                    </li>
+                    <li class="flex items-center gap-3">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="text-cyan-400"><path d="M14.5 16.5a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0Z"/><path d="M8 16v-1.5a2.5 2.5 0 1 1 5 0V16"/><path d="M16 16v-1.5a2.5 2.5 0 1 0-5 0V16"/></svg>
+                        <span data-key="highlight4">Cultural Performances & Fun Events</span>
+                    </li>
+                </ul>
+
+                <p class="text-gray-300 max-w-4xl mx-auto text-lg mt-8 text-left md:text-center leading-relaxed" data-key="aboutPara3">
+                    Every year, Abhiyantrikotsav engages students from across the university to challenge themselves, showcase their skills, and build lasting connections. It is more than just a fest — it is a <strong>celebration of engineering, innovation, and collaboration</strong>.
+                </p>
+            </section>
+
+            <!-- Explore Events Section -->
+            <section class="text-center py-12">
+                 <h2 class="text-3xl md:text-4xl font-bold text-white mb-6" data-key="ctaTitle">Ready for the Challenge?</h2>
+                <p class="text-lg text-gray-300 mb-10 max-w-2xl mx-auto" data-key="ctaDescription">Explore our diverse lineup of technical and non-technical events. Find your passion, register your team, and get ready to innovate.</p>
+                <a href="./events.html" class="cta-button inline-flex items-center gap-3 bg-transparent font-bold text-xl py-4 px-10 rounded-full" data-key="ctaButton">
+                    Explore The Events
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="transition-transform group-hover:translate-x-2"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                </a>
+            </section>
+        </main>
+
+        <!-- Footer -->
+        <footer class="border-t border-slate-700/50 mt-8">
+            <div class="container mx-auto text-center px-6 py-8">
+                <p class="text-gray-500" data-key="footerText">&copy; 2025 School of Engineering, <br>Central University of Karnataka. All Rights Reserved.<br> Website created and maintained by Vishwaa J, ECE Dept.</p>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        // --- Particle System Logic ---
+        const canvas = document.getElementById('particle-canvas');
+        const ctx = canvas.getContext('2d');
+        let particles = [];
+        let particleCount = window.innerWidth < 768 ? 60 : 100;
+
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            particleCount = window.innerWidth < 768 ? 60 : 100;
+        }
+
+        class Particle {
+            constructor(x, y, size, speedX, speedY) {
+                this.x = x;
+                this.y = y;
+                this.size = size;
+                this.speedX = speedX;
+                this.speedY = speedY;
+            }
+            update() {
+                if (this.x > canvas.width || this.x < 0) this.speedX *= -1;
+                if (this.y > canvas.height || this.y < 0) this.speedY *= -1;
+                this.x += this.speedX;
+                this.y += this.speedY;
+            }
+            draw() {
+                ctx.fillStyle = 'rgba(6, 182, 212, 0.8)';
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fill();
+            }
+        }
+
+        function createParticles() {
+            particles = [];
+            for (let i = 0; i < particleCount; i++) {
+                const size = Math.random() * 1.5 + 1;
+                const x = Math.random() * canvas.width;
+                const y = Math.random() * canvas.height;
+                const speedX = Math.random() * 0.5 - 0.25;
+                const speedY = Math.random() * 0.5 - 0.25;
+                particles.push(new Particle(x, y, size, speedX, speedY));
+            }
+        }
+
+        function animate() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            for (let i = 0; i < particles.length; i++) {
+                particles[i].update();
+                particles[i].draw();
+                for (let j = i; j < particles.length; j++) {
+                    const dx = particles[i].x - particles[j].x;
+                    const dy = particles[i].y - particles[j].y;
+                    const distance = Math.sqrt(dx * dx + dy * dy);
+                    if (distance < 120) {
+                        ctx.beginPath();
+                        ctx.strokeStyle = `rgba(6, 182, 212, ${1 - distance / 120})`;
+                        ctx.lineWidth = 0.5;
+                        ctx.moveTo(particles[i].x, particles[i].y);
+                        ctx.lineTo(particles[j].x, particles[j].y);
+                        ctx.stroke();
+                        ctx.closePath();
+                    }
+                }
+            }
+            requestAnimationFrame(animate);
+        }
+
+        window.addEventListener('resize', () => {
+            resizeCanvas();
+            createParticles();
+        });
+
+        // --- Translation and Menu Logic ---
+        document.addEventListener('DOMContentLoaded', () => {
+            const navbar = document.getElementById('navbar');
+            const menuBtn = document.getElementById('menu-btn');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const menuOpenIcon = document.getElementById('menu-open-icon');
+            const menuCloseIcon = document.getElementById('menu-close-icon');
+            const langDropdownBtn = document.getElementById('lang-dropdown-btn');
+            const langDropdownMenu = document.getElementById('lang-dropdown-menu');
+            const langDropdownContainer = document.getElementById('lang-dropdown-container');
+
+            const translations = {
+                en: {
+                    navAbout: "About", navEvents: "Events", heroTitle: "Abhiyantrikotsav", heroSubTitle: "School of Engineering,<br> Central University of Karnataka", heroDescription: "A convergence of circuits and systems, where innovation in Electrical and Electronics Engineering sparks to life.", festDates: "September 15th - 19th", festVenue: "Venue: School Of Engineering, CUK", aboutTitle: "About Abhiyantrikotsav", aboutSubTitle: "The annual technical fest of the School of Engineering, Central University of Karnataka", aboutPara1: "<strong>Abhiyantrikotsav</strong> is the annual technical fest of the School of Engineering, Central University of Karnataka — where <em>innovation meets creativity</em> and <em>knowledge meets fun</em>. It is a vibrant platform that brings together the students of our university to celebrate the spirit of engineering and technology.", aboutPara2: "With a diverse range of <strong>competitions, workshops, hackathons, technical talks,</strong> and <strong>cultural showcases</strong>, Abhiyantrikotsav aims to foster problem-solving, critical thinking, and teamwork among participants. The fest not only encourages technical excellence but also provides a stage for budding engineers to explore new horizons, exchange ideas, and transform concepts into impactful solutions.", highlight1: "Hackathons & Coding Battles", highlight2: "Hands-on Workshops", highlight3: "Technical Talks & Presentations", highlight4: "Cultural Performances & Fun Events", aboutPara3: "Every year, Abhiyantrikotsav engages students from across the university to challenge themselves, showcase their skills, and build lasting connections. It is more than just a fest — it is a <strong>celebration of engineering, innovation, and collaboration</strong>.", ctaTitle: "Ready for the Challenge?", ctaDescription: "Explore our diverse lineup of technical and non-technical events. Find your passion, register your team, and get ready to innovate.", ctaButton: "Explore The Events", footerText: "© 2025 School of Engineering, <br>Central University of Karnataka. All Rights Reserved.<br> Website created and maintained by Vishwaa J, ECE Dept.", ctaButtonHero: "Explore Events"
+                },
+                hi: {
+                    navAbout: "बारे में", navEvents: "आयोजन", heroTitle: "अभियांत्रिकोत्सव", heroSubTitle: "स्कूल ऑफ इंजीनियरिंग,<br> कर्नाटक केंद्रीय विश्वविद्यालय", heroDescription: "सर्किट और सिस्टम का संगम, जहां इलेक्ट्रिकल और इलेक्ट्रॉनिक्स इंजीनियरिंग में नवाचार जीवंत होता है।", festDates: "15 - 19 सितंबर", festVenue: "स्थान: स्कूल ऑफ इंजीनियरिंग, सीयूके", aboutTitle: "अभियांत्रिकोत्सव के बारे में", aboutSubTitle: "स्कूल ऑफ इंजीनियरिंग, कर्नाटक केंद्रीय विश्वविद्यालय का वार्षिक तकनीकी उत्सव", aboutPara1: "<strong>अभियांत्रिकोत्सव</strong> स्कूल ऑफ इंजीनियरिंग, कर्नाटक केंद्रीय विश्वविद्यालय का वार्षिक तकनीकी उत्सव है - जहां <em>नवाचार रचनात्मकता से मिलता है</em> और <em>ज्ञान मनोरंजन से मिलता है</em>। यह हमारे विश्वविद्यालय के छात्रों को इंजीनियरिंग और प्रौद्योगिकी की भावना का जश्न मनाने के लिए एक साथ लाने वाला एक जीवंत मंच है।", aboutPara2: "<strong>प्रतियोगिताओं, कार्यशालाओं, हैकाथॉन, तकनीकी वार्ताओं,</strong> और <strong>सांस्कृतिक प्रदर्शनों</strong> की विविध श्रृंखला के साथ, अभियांत्रिकोत्सव का उद्देश्य प्रतिभागियों के बीच समस्या-समाधान, महत्वपूर्ण सोच और टीम वर्क को बढ़ावा देना है। यह उत्सव न केवल तकनीकी उत्कृष्टता को प्रोत्साहित करता है बल्कि उभरते इंजीनियरों को नए क्षितिज तलाशने, विचारों का आदान-प्रदान करने और अवधारणाओं को प्रभावशाली समाधानों में बदलने के लिए एक मंच भी प्रदान करता है।", highlight1: "हैकाथॉन और कोडिंग बैटल", highlight2: "व्यावहारिक कार्यशालाएं", highlight3: "तकनीकी वार्ता और प्रस्तुतियाँ", highlight4: "सांस्कृतिक प्रदर्शन और मजेदार कार्यक्रम", aboutPara3: "हर साल, अभियांत्रिकोत्सव विश्वविद्यालय भर के छात्रों को खुद को चुनौती देने, अपने कौशल का प्रदर्शन करने और स्थायी संबंध बनाने के लिए संलग्न करता है। यह सिर्फ एक उत्सव से कहीं बढ़कर है - यह <strong>इंजीनियरिंग, नवाचार और सहयोग का उत्सव</strong> है।", ctaTitle: "चुनौती के लिए तैयार हैं?", ctaDescription: "हमारे तकनीकी और गैर-तकनीकी आयोजनों की विविध श्रृंखला का अन्वेषण करें। अपना जुनून खोजें, अपनी टीम पंजीकृत करें, और नवाचार के लिए तैयार हो जाएं।", ctaButton: "आयोजन देखें", footerText: "© 2025 स्कूल ऑफ इंजीनियरिंग, <br>कर्नाटक केंद्रीय विश्वविद्यालय। सर्वाधिकार सुरक्षित।<br> वेबसाइट विश्वा जे, ईसीई विभाग द्वारा बनाई और बनाए रखी गई है।", ctaButtonHero: "आयोजन देखें"
+                },
+                ta: {
+                    navAbout: "பற்றி", navEvents: "நிகழ்வுகள்", heroTitle: "அபியாந்திரிகோத்சவ்", heroSubTitle: "பொறியியல் பள்ளி,<br> கர்நாடக மத்திய பல்கலைக்கழகம்", heroDescription: "சுற்றுகள் மற்றும் அமைப்புகளின் சங்கமம், இங்கு மின் மற்றும் மின்னணு பொறியியலில் புதுமை உயிர் பெறுகிறது.", festDates: "செப்டம்பர் 15 - 19", festVenue: "இடம்: பொறியியல் பள்ளி, சியுகே", aboutTitle: "அபியாந்திரிகோத்சவ் பற்றி", aboutSubTitle: "பொறியியல் பள்ளி, கர்நாடக மத்திய பல்கலைக்கழகத்தின் வருடாந்திர தொழில்நுட்ப விழா", aboutPara1: "<strong>அபியாந்திரிகோத்சவ்</strong> என்பது கர்நாடக மத்திய பல்கலைக்கழகத்தின் பொறியியல் பள்ளியின் வருடாந்திர தொழில்நுட்ப விழாவாகும் - இங்கு <em>புதுமை படைப்பாற்றலை சந்திக்கிறது</em> மற்றும் <em>அறிவு வேடிக்கையை சந்திக்கிறது</em>. இது எங்கள் பல்கலைக்கழக மாணவர்களை ஒன்றிணைத்து பொறியியல் மற்றும் தொழில்நுட்பத்தின் உணர்வைக் கொண்டாடும் ஒரு துடிப்பான தளமாகும்.", aboutPara2: "<strong>போட்டிகள், பட்டறைகள், ஹேக்கத்தான்கள், தொழில்நுட்ப உரைகள்,</strong> மற்றும் <strong>கலாச்சார காட்சிகள்</strong> ஆகியவற்றின் மாறுபட்ட வரம்புடன், அபியாந்திரிகோத்சவ் பங்கேற்பாளர்களிடையே சிக்கலைத் தீர்ப்பது, விமர்சன சிந்தனை மற்றும் குழுப்பணி ஆகியவற்றை வளர்ப்பதை நோக்கமாகக் கொண்டுள்ளது. இந்த விழா தொழில்நுட்ப சிறப்பை ஊக்குவிப்பது மட்டுமல்லாமல், வளரும் பொறியாளர்களுக்கு புதிய எல்லைகளை ஆராயவும், யோசனைகளைப் பரிமாறிக்கொள்ளவும், கருத்துக்களை தாக்கமான தீர்வுகளாக மாற்றவும் ஒரு தளத்தை வழங்குகிறது.", highlight1: "ஹேக்கத்தான்கள் & கோடிங் போர்கள்", highlight2: "செய்முறை பட்டறைகள்", highlight3: "தொழில்நுட்ப உரைகள் & விளக்கக்காட்சிகள்", highlight4: "கலாச்சார நிகழ்ச்சிகள் & வேடிக்கையான நிகழ்வுகள்", aboutPara3: "ஒவ்வொரு ஆண்டும், அபியாந்திரிகோத்சவ் பல்கலைக்கழகம் முழுவதும் உள்ள மாணவர்களை தங்களை சவால் செய்ய, தங்கள் திறமைகளை வெளிப்படுத்த, மற்றும் நீடித்த தொடர்புகளை உருவாக்க ஈடுபடுத்துகிறது. இது ஒரு விழாவை விட மேலானது - இது <strong>பொறியியல், புதுமை மற்றும் ஒத்துழைப்பின் கொண்டாட்டம்</strong>.", ctaTitle: "சவாலுக்கு தயாரா?", ctaDescription: "எங்கள் தொழில்நுட்ப மற்றும் தொழில்நுட்பம் அல்லாத நிகழ்வுகளின் பல்வேறு வரிசையை ஆராயுங்கள். உங்கள் ஆர்வத்தைக் கண்டறியுங்கள், உங்கள் அணியைப் பதிவு செய்யுங்கள், புதுமைக்குத் தயாராகுங்கள்.", ctaButton: "நிகழ்வுகளை ஆராயுங்கள்", footerText: "© 2025 பொறியியல் பள்ளி, <br>கர்நாடக மத்திய பல்கலைக்கழகம். அனைத்து உரிமைகளும் பாதுகாக்கப்பட்டவை.<br> இணையதளம் விஷ்வா ஜே, ஈசிஇ துறையால் உருவாக்கப்பட்டு பராமரிக்கப்படுகிறது.", ctaButtonHero: "நிகழ்வுகளை ஆராயுங்கள்"
+                },
+                te: {
+                    navAbout: "గురించి", navEvents: "ఈవెంట్లు", heroTitle: "అభియాంత్రికోత్సవ్", heroSubTitle: "స్కూల్ ఆఫ్ ఇంజనీరింగ్,<br> సెంట్రల్ యూనివర్శిటీ ఆఫ్ కర్ణాటక", heroDescription: "సర్క్యూట్లు మరియు సిస్టమ్‌ల కలయిక, ఇక్కడ ఎలక్ట్రికల్ మరియు ఎలక్ట్రానిక్స్ ఇంజనీరింగ్‌లో ఆవిష్కరణ జీవితానికి వస్తుంది.", festDates: "సెప్టెంబర్ 15 - 19", festVenue: "వేదిక: స్కూల్ ఆఫ్ ఇంజనీరింగ్, సియుకె", aboutTitle: "అభియాంత్రికోత్సవ్ గురించి", aboutSubTitle: "స్కూల్ ఆఫ్ ఇంజనీరింగ్, సెంట్రల్ యూనివర్శిటీ ఆఫ్ కర్ణాటక యొక్క వార్షిక టెక్నికల్ ఫెస్ట్", aboutPara1: "<strong>అభియాంత్రికోత్సవ్</strong> సెంట్రల్ యూనివర్శిటీ ఆఫ్ కర్ణాటక యొక్క స్కూల్ ఆఫ్ ఇంజనీరింగ్ యొక్క వార్షిక టెక్నికల్ ఫెస్ట్ - ఇక్కడ <em>ఆవిష్కరణ సృజనాత్మకతను కలుస్తుంది</em> మరియు <em>జ్ఞానం వినోదాన్ని కలుస్తుంది</em>. ఇది మా విశ్వవిద్యాలయం యొక్క విద్యార్థులను ఇంజనీరింగ్ మరియు టెక్నాలజీ స్ఫూర్తిని జరుపుకోవడానికి ఒకచోట చేర్చే ఒక శక్తివంతమైన వేదిక.", aboutPara2: "<strong>పోటీలు, వర్క్‌షాప్‌లు, హ్యాకథాన్‌లు, టెక్నికల్ టాక్‌లు,</strong> మరియు <strong>సాంస్కృతిక ప్రదర్శనలు</strong> యొక్క విభిన్న శ్రేణితో, అభియాంత్రికోత్సవ్ పాల్గొనేవారిలో సమస్య-పరిష్కారం, విమర్శనాత్మక ఆలోచన మరియు జట్టుకృషిని పెంపొందించాలని లక్ష్యంగా పెట్టుకుంది. ఈ ఫెస్ట్ సాంకేతిక నైపుణ్యాన్ని ప్రోత్సహించడమే కాకుండా, వర్ధమాన ఇంజనీర్లకు కొత్త క్షితిజాలను అన్వేషించడానికి, ఆలోచనలను మార్పిడి చేసుకోవడానికి మరియు భావనలను ప్రభావవంతమైన పరిష్కారాలుగా మార్చడానికి ఒక వేదికను అందిస్తుంది.", highlight1: "హ్యాకథాన్‌లు & కోడింగ్ యుద్ధాలు", highlight2: "చేతితో చేసే వర్క్‌షాప్‌లు", highlight3: "టెక్నికల్ టాక్స్ & ప్రెజెంటేషన్లు", highlight4: "సాంస్కృతిక ప్రదర్శనలు & సరదా ఈవెంట్‌లు", aboutPara3: "ప్రతి సంవత్సరం, అభియాంత్రికోత్సవ్ విశ్వవిద్యాలయం అంతటా ఉన్న విద్యార్థులను తమను తాము సవాలు చేసుకోవడానికి, వారి నైపుణ్యాలను ప్రదర్శించడానికి మరియు శాశ్వత సంబంధాలను ఏర్పరచుకోవడానికి నిమగ్నం చేస్తుంది. ఇది కేవలం ఒక ఫెస్ట్ కంటే ఎక్కువ - ఇది <strong>ఇంజనీరింగ్, ఆవిష్కరణ మరియు సహకారం యొక్క వేడుక</strong>.", ctaTitle: "సవాలుకు సిద్ధంగా ఉన్నారా?", ctaDescription: "మా సాంకేతిక మరియు సాంకేతికేతర ఈవెంట్‌ల యొక్క విభిన్న శ్రేణిని అన్వేషించండి. మీ అభిరుచిని కనుగొనండి, మీ బృందాన్ని నమోదు చేయండి మరియు ఆవిష్కరణకు సిద్ధంగా ఉండండి.", ctaButton: "ఈవెంట్‌లను అన్వేషించండి", footerText: "© 2025 స్కూల్ ఆఫ్ ఇంజనీరింగ్, <br>సెంట్రల్ యూనివర్శిటీ ఆఫ్ కర్ణాటక. అన్ని హక్కులు ప్రత్యేకించబడ్డాయి.<br> వెబ్‌సైట్ విశ్వా జె, ఇసిఇ విభాగం ద్వారా సృష్టించబడింది మరియు నిర్వహించబడుతుంది.", ctaButtonHero: "ఈవెంట్‌లను అన్వేషించండి"
+                },
+                kn: {
+                    navAbout: "ಬಗ್ಗೆ", navEvents: "ಕಾರ್ಯಕ್ರಮಗಳು", heroTitle: "ಅಭಿಯಾంత్రಿಕೋತ್ಸವ", heroSubTitle: "ಸ್ಕೂಲ್ ಆಫ್ ಇಂಜಿನಿಯರಿಂಗ್,<br> ಕರ್ನಾಟಕ ಕೇಂದ್ರೀಯ ವಿಶ್ವವಿದ್ಯಾಲಯ", heroDescription: "ಸರ್ಕ್ಯೂಟ್‌ಗಳು ಮತ್ತು ಸಿಸ್ಟಮ್‌ಗಳ ಸಂಗಮ, ಅಲ್ಲಿ ಎಲೆಕ್ಟ್ರಿಕಲ್ ಮತ್ತು ಎಲೆಕ್ಟ್ರಾನಿಕ್ಸ್ ಇಂಜಿನಿಯరిಂಗ್‌ನಲ್ಲಿನ ನಾವೀನ್ಯತೆ ಜೀವಂತವಾಗುತ್ತದೆ.", festDates: "ಸೆಪ್ಟೆಂಬರ್ 15 - 19", festVenue: "ಸ್ಥಳ: ಸ್ಕೂಲ್ ಆಫ್ ಇಂಜಿನಿಯರಿಂಗ್, ಸಿಯುಕೆ", aboutTitle: "ಅಭಿಯಾంత్రಿಕೋತ್ಸವ ಬಗ್ಗೆ", aboutSubTitle: "ಸ್ಕೂಲ್ ಆಫ್ ಇಂಜಿನಿಯರಿಂಗ್, ಕರ್ನಾಟಕ ಕೇಂದ್ರೀಯ ವಿಶ್ವವಿದ್ಯಾಲಯದ ವಾರ್ಷಿಕ ತಾಂತ್ರಿಕ ಉತ್ಸವ", aboutPara1: "<strong>ಅಭಿಯಾంత్రಿಕೋತ್ಸವ</strong> ಕರ್ನಾಟಕ ಕೇಂದ್ರೀಯ ವಿಶ್ವವಿದ್ಯಾಲಯದ ಸ್ಕೂಲ್ ಆಫ್ ಇಂಜಿನಿಯರಿಂಗ್‌ನ ವಾರ್ಷಿಕ ತಾಂತ್ರಿಕ ಉತ್ಸವವಾಗಿದೆ - ಇಲ್ಲಿ <em>ನಾವೀನ್ಯತೆ ಸೃಜನಶೀಲತೆಯನ್ನು ಸಂಧಿಸುತ್ತದೆ</em> ಮತ್ತು <em>ಜ್ಞಾನ ವಿನೋದವನ್ನು ಸಂಧಿಸುತ್ತದೆ</em>. ಇದು ನಮ್ಮ ವಿಶ್ವವಿದ್ಯಾಲಯದ ವಿದ್ಯಾರ್ಥಿಗಳನ್ನು ಇಂಜಿನಿಯರಿಂಗ್ ಮತ್ತು ತಂತ್ರಜ್ಞಾನದ ಉತ್ಸಾಹವನ್ನು ಆಚರಿಸಲು ಒಟ್ಟುಗೂಡಿಸುವ ಒಂದು ರೋಮಾಂಚಕ ವೇದಿಕೆಯಾಗಿದೆ.", aboutPara2: "<strong>ಸ್ಪರ್ಧೆಗಳು, ಕಾರ್ಯಾಗಾರಗಳು, ಹ್ಯಾಕಥಾನ್‌ಗಳು, ತಾಂತ್ರಿಕ ಮಾತುಕತೆಗಳು,</strong> ಮತ್ತು <strong>ಸಾಂಸ್ಕೃತಿಕ ಪ್ರದರ್ಶನಗಳು</strong> ಇವುಗಳ ವೈವಿಧ್ಯಮಯ ಶ್ರೇಣಿಯೊಂದಿಗೆ, ಅಭಿಯಾంత్రಿಕೋತ್ಸವವು ಭಾಗವಹಿಸುವವರಲ್ಲಿ ಸಮಸ್ಯೆ-ಪರಿಹರಿಸುವಿಕೆ, ವಿಮರ್ಶಾತ್ಮಕ ಚಿಂತನೆ ಮತ್ತು ತಂಡದ ಕೆಲಸವನ್ನು ಬೆಳೆಸುವ ಗುರಿಯನ್ನು ಹೊಂದಿದೆ. ಈ ಉತ್ಸವವು ತಾಂತ್ರಿಕ ಶ್ರೇಷ್ಠತೆಯನ್ನು ಪ್ರೋತ್ಸಾಹಿಸುವುದಲ್ಲದೆ, ಉದಯೋನ್ಮುಖ ಇಂಜಿನಿಯರ್‌ಗಳಿಗೆ ಹೊಸ দিগಂತಗಳನ್ನು ಅನ್ವೇಷಿಸಲು, ಆಲೋಚನೆಗಳನ್ನು ವಿನಿಮಯ ಮಾಡಿಕೊಳ್ಳಲು ಮತ್ತು ಪರಿಕಲ್ಪನೆಗಳನ್ನು ಪರಿಣಾಮಕಾರಿ ಪರಿಹಾರಗಳಾಗಿ ಪರಿವರ್ತಿಸಲು ಒಂದು ವೇದಿಕೆಯನ್ನು ಒದಗಿಸುತ್ತದೆ.", highlight1: "ಹ್ಯಾಕಥಾನ್‌ಗಳು ಮತ್ತು ಕೋಡಿಂಗ್ ಯುದ್ಧಗಳು", highlight2: "ಕೈಯಾರೆ ಕಾರ್ಯಾಗಾರಗಳು", highlight3: "ತಾಂತ್ರಿಕ ಮಾತುಕತೆಗಳು ಮತ್ತು ಪ್ರಸ್ತುತಿಗಳು", highlight4: "ಸಾಂಸ್ಕೃತಿಕ ಪ್ರದರ್ಶನಗಳು ಮತ್ತು ವಿನೋದ ಕಾರ್ಯಕ್ರಮಗಳು", aboutPara3: "ಪ್ರತಿ ವರ್ಷ, ಅಭಿಯಾంత్రಿಕೋತ್ಸವವು ವಿಶ್ವವಿದ್ಯಾಲಯದಾದ್ಯಂತದ ವಿದ್ಯಾರ್ಥಿಗಳನ್ನು ತಮ್ಮನ್ನು ತಾವು ಸವಾಲು ಹಾಕಲು, ತಮ್ಮ ಕೌಶಲ್ಯಗಳನ್ನು ಪ್ರದರ್ಶಿಸಲು ಮತ್ತು ಶಾಶ್ವತ ಸಂಪರ್ಕಗಳನ್ನು ನಿರ್ಮಿಸಲು ತೊಡಗಿಸುತ್ತದೆ. ಇದು ಕೇವಲ ಒಂದು ಉತ್ಸವಕ್ಕಿಂತ ಹೆಚ್ಚು - ಇದು <strong>ಇಂಜಿನಿಯರಿಂಗ್, ನಾವೀನ್ಯತೆ ಮತ್ತು ಸಹಯೋಗದ ಆಚರಣೆ</strong>.", ctaTitle: "ಸವಾಲಿಗೆ ಸಿದ್ಧರಿದ್ದೀರಾ?", ctaDescription: "ನಮ್ಮ ತಾಂತ್ರಿಕ ಮತ್ತು ತಾಂತ್ರಿಕವಲ್ಲದ ಕಾರ್ಯಕ್ರಮಗಳ ವೈವಿಧ್ಯಮಯ ಶ್ರೇಣಿಯನ್ನು ಅನ್ವೇಷಿಸಿ. ನಿಮ್ಮ ಆಸಕ್ತಿಯನ್ನು ಕಂಡುಕೊಳ್ಳಿ, ನಿಮ್ಮ ತಂಡವನ್ನು ನೋಂದಾಯಿಸಿ ಮತ್ತು ನಾವೀನ್ಯತೆಗೆ ಸಿದ್ಧರಾಗಿ.", ctaButton: "ಕಾರ್ಯಕ್ರಮಗಳನ್ನು ಅನ್ವೇಷಿಸಿ", footerText: "© 2025 ಸ್ಕೂಲ್ ಆಫ್ ಇಂಜಿನಿಯರಿಂಗ್, <br>ಕರ್ನಾಟಕ ಕೇಂದ್ರೀಯ ವಿಶ್ವವಿದ್ಯಾಲಯ. ಎಲ್ಲಾ ಹಕ್ಕುಗಳನ್ನು ಕಾಯ್ದಿರಿಸಲಾಗಿದೆ.<br> ವೆಬ್‌ಸೈಟ್ ಅನ್ನು ವಿಶ್ವಾ ಜೆ, ಇಸಿಇ ವಿಭಾಗವು ರಚಿಸಿದೆ ಮತ್ತು ನಿರ್ವಹಿಸುತ್ತದೆ.", ctaButtonHero: "ಕಾರ್ಯಕ್ರಮಗಳನ್ನು ಅನ್ವೇಷಿಸಿ"
+                },
+                ml: {
+                    navAbout: "കുറിച്ച്", navEvents: "പരിപാടികൾ", heroTitle: "അഭിയാന്ത്രികോത്സവ്", heroSubTitle: "സ്കൂൾ ഓഫ് എഞ്ചിനീയറിംഗ്,<br> സെൻട്രൽ യൂണിവേഴ്സിറ്റി ഓഫ് കർണാടക", heroDescription: "സർക്യൂട്ടുകളുടെയും സിസ്റ്റങ്ങളുടെയും ഒരു സംഗമം, ഇവിടെ ഇലക്ട്രിക്കൽ, ഇലക്ട്രോണിക്സ് എഞ്ചിനീയറിംഗിലെ നൂതനാശയങ്ങൾക്ക് ജീവൻ ലഭിക്കുന്നു.", festDates: "സെപ്റ്റംബർ 15 - 19", festVenue: "വേദി: സ്കൂൾ ഓഫ് എഞ്ചിനീയറിംഗ്, സിയുകെ", aboutTitle: "അഭിയാന്ത്രികോത്സവിനെക്കുറിച്ച്", aboutSubTitle: "സ്കൂൾ ഓഫ് എഞ്ചിനീയറിംഗ്, സെൻട്രൽ യൂണിവേഴ്സിറ്റി ഓഫ് കർണാടകയുടെ വാർഷിക സാങ്കേതിക ഉത്സവം", aboutPara1: "<strong>അഭിയാന്ത്രികോത്സവ്</strong> സെൻട്രൽ യൂണിവേഴ്സിറ്റി ഓഫ് കർണാടകയിലെ സ്കൂൾ ഓഫ് എഞ്ചിനീയറിംഗിന്റെ വാർഷിക സാങ്കേതിക ഉത്സവമാണ് - ഇവിടെ <em>നൂതനാശയം സർഗ്ഗാത്മകതയുമായി ചേരുന്നു</em>, <em>അറിവ് വിനോദവുമായി ചേരുന്നു</em>. ഞങ്ങളുടെ സർവ്വകലാശാലയിലെ വിദ്യാർത്ഥികളെ എഞ്ചിനീയറിംഗിന്റെയും സാങ്കേതികവിദ്യയുടെയും ആവേശം ആഘോഷിക്കാൻ ഒരുമിപ്പിക്കുന്ന ഒരു ഊർജ്ജസ്വലമായ വേദിയാണിത്.", aboutPara2: "<strong>മത്സരങ്ങൾ, വർക്ക്ഷോപ്പുകൾ, ഹാക്കത്തോണുകൾ, സാങ്കേതിക പ്രഭാഷണങ്ങൾ,</strong> കൂടാതെ <strong>സാംസ്കാരിക ప్రదర్శనలు</strong> എന്നിവയുടെ വൈവിധ്യമാർന്ന ശ്രേണിയിലൂടെ, അഭിയാന്ത്രികോത്സവ് പങ്കാളികൾക്കിടയിൽ പ്രശ്‌നപരിഹാരം, വിമർശനാത്മക ചിന്ത, ടീം വർക്ക് എന്നിവ പ്രോത്സാഹിപ്പിക്കാൻ ലക്ഷ്യമിടുന്നു. ഈ ഉത്സവം സാങ്കേതിക മികവിനെ പ്രോത്സാഹിപ്പിക്കുക മാത്രമല്ല, വളർന്നുവരുന്ന എഞ്ചിനീയർമാർക്ക് പുതിയ ചക്രവാളങ്ങൾ കണ്ടെത്താനും, ആശയങ്ങൾ കൈമാറാനും, ആശയങ്ങളെ ഫലപ്രദമായ പരിഹാരങ്ങളാക്കി മാറ്റാനും ഒരു വേദി നൽകുന്നു.", highlight1: "ഹാക്കത്തോണുകളും കോഡിംഗ് പോരാട്ടങ്ങളും", highlight2: "പ്രയോഗിക വർക്ക്ഷോപ്പുകൾ", highlight3: "സാങ്കേതിക പ്രഭാഷണങ്ങളും അവതരണങ്ങളും", highlight4: "സാംസ്കാരിക പ്രകടനങ്ങളും വിനോദ പരിപാടികളും", aboutPara3: "എല്ലാ വർഷവും, അഭിയാന്ത്രികോത്സവ് സർവ്വകലാശാലയിലുടനീളമുള്ള വിദ്യാർത്ഥികളെ സ്വയം വെല്ലുവിളിക്കാനും, അവരുടെ കഴിവുകൾ പ്രകടിപ്പിക്കാനും, ശാശ്വതമായ ബന്ധങ്ങൾ സ്ഥാപിക്കാനും പ്രേരിപ്പിക്കുന്നു. ഇത് ഒരു ഉത്സവത്തേക്കാൾ ഉപരിയാണ് - ഇത് <strong>എഞ്ചിനീയറിംഗ്, നൂതനാശയം, സഹകരണം എന്നിവയുടെ ഒരു ആഘോഷമാണ്</strong>.", ctaTitle: "വെല്ലുവിളിക്ക് തയ്യാറാണോ?", ctaDescription: "ഞങ്ങളുടെ സാങ്കേതികവും അല്ലാത്തതുമായ പരിപാടികളുടെ വൈവിധ്യമാർന്ന നിര പര്യവേക്ഷണം ചെയ്യുക. നിങ്ങളുടെ താൽപ്പര്യം കണ്ടെത്തുക, നിങ്ങളുടെ ടീമിനെ രജിസ്റ്റർ ചെയ്യുക, നൂതനാശയങ്ങൾക്ക് തയ്യാറാകുക.", ctaButton: "പരിപാടികൾ പര്യവേക്ഷണം ചെയ്യുക", footerText: "© 2025 സ്കൂൾ ഓഫ് എഞ്ചിനീയറിംഗ്, <br>സെൻട്രൽ യൂണിവേഴ്സിറ്റി ഓഫ് കർണാടക. എല്ലാ അവകാശങ്ങളും നിക്ഷിപ്തം.<br> വെബ്സൈറ്റ് സൃഷ്ടിച്ച് പരിപാലിക്കുന്നത് വിശ്വ ജെ, ഇസിഇ വകുപ്പ്.", ctaButtonHero: "പരിപാടികൾ പര്യവേക്ഷണം ചെയ്യുക"
+                }
+            };
+
+            function translatePage(lang) {
+                if (!translations[lang]) return;
+                document.querySelectorAll('[data-key]').forEach(element => {
+                    const key = element.dataset.key;
+                    if (translations[lang][key]) {
+                        element.innerHTML = translations[lang][key];
+                    }
+                });
+                document.documentElement.lang = lang;
+            }
+
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 50) {
+                    navbar.querySelector('.glass-card').style.backgroundColor = 'rgba(15, 23, 42, 0.8)';
+                } else {
+                    navbar.querySelector('.glass-card').style.backgroundColor = 'rgba(15, 23, 42, 0.5)';
+                }
+            });
+
+            menuBtn.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+                menuOpenIcon.classList.toggle('hidden');
+                menuCloseIcon.classList.toggle('hidden');
+            });
+
+            langDropdownBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                langDropdownMenu.classList.toggle('hidden');
+            });
+
+            window.addEventListener('click', (e) => {
+                if (!langDropdownContainer.contains(e.target)) {
+                    langDropdownMenu.classList.add('hidden');
+                }
+                if (!mobileMenu.classList.contains('hidden') && !navbar.contains(e.target)) {
+                    mobileMenu.classList.add('hidden');
+                    menuOpenIcon.classList.remove('hidden');
+                    menuCloseIcon.classList.add('hidden');
+                }
+            });
+            
+            // Close mobile menu when a nav link is clicked (language links are handled separately)
+            document.querySelectorAll('#mobile-menu a:not([data-lang])').forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileMenu.classList.add('hidden');
+                    menuOpenIcon.classList.remove('hidden');
+                    menuCloseIcon.classList.add('hidden');
+                });
+            });
+
+            document.querySelectorAll('[data-lang]').forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const selectedLang = e.target.getAttribute('data-lang');
+                    translatePage(selectedLang);
+                    langDropdownMenu.classList.add('hidden');
+                    if(!mobileMenu.classList.contains('hidden')) {
+                         mobileMenu.classList.add('hidden');
+                         menuOpenIcon.classList.remove('hidden');
+                         menuCloseIcon.classList.add('hidden');
+                    }
+                });
+            });
+
+            // --- Initial Setup ---
+            resizeCanvas();
+            createParticles();
+            animate();
+            translatePage('en'); // Set default language
+        });
+    </script>
+</body>
+</html>
+
