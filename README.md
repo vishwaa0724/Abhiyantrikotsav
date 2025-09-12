@@ -35,12 +35,14 @@ Tailwind CSS: A utility-first CSS framework for rapid and responsive UI developm
 JavaScript (Vanilla): For the interactive particle background, mobile navigation, and the multi-language translation functionality.
 
 📂 Project Structure
+
 The repository is organized into two primary files:
 
 /
-├── index.html      # The main landing page of the fest website.
 
-└── events.html     # The page that lists all the fest events.
+    ├── index.html      # The main landing page of the fest website.
+    
+    └── events.html     # The page that lists all the fest events.
 
 🛠️ Technical Overview
 This section provides a brief overview of the project's technical setup for anyone reviewing the code.
@@ -55,4 +57,5 @@ Text & Translations: All text content for the homepage is managed within a singl
 
 ⚖️ Usage Rights
 The code in this repository is proprietary and is showcased for portfolio purposes only. You are welcome to review the code to understand its structure and my development approach. However, you may not copy, distribute, or reuse any part of this project without explicit written permission.
+
 
