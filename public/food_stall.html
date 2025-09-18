@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Food Stalls | Abhiyantrikotsav</title>
+    <!-- Favicon -->
+    <link rel="icon" href="WhatsApp_Image_2025-08-28_at_18.00.19_71f4080f-removebg-preview.png" type="image/jpeg">
+    <!-- Tailwind CSS for styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Orbitron for headings, Inter for body -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Orbitron:wght@700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --glow-color: hsl(27, 95%, 55%); /* Orange glow for food page */
+        }
+        html {
+            scroll-behavior: smooth;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #020617;
+            overflow-x: hidden;
+        }
+        h1, h2, h3 {
+            font-family: 'Orbitron', sans-serif;
+            text-shadow: 0 0 10px rgba(249, 115, 22, 0.5), 0 0 20px rgba(249, 115, 22, 0.3);
+        }
+        .glass-card {
+            background: rgba(15, 23, 42, 0.6);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(251, 146, 60, 0.2);
+            border-radius: 1.5rem;
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            overflow: hidden; /* To keep images within rounded corners */
+        }
+        .glass-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 12px 40px 0 rgba(249, 115, 22, 0.25);
+        }
+        .cta-button {
+            position: relative;
+            border: 2px solid var(--glow-color);
+            color: white;
+            text-shadow: 0 0 5px var(--glow-color);
+            box-shadow: inset 0 0 0.8em 0 var(--glow-color), 0 0 0.8em 0 var(--glow-color);
+            transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+        .cta-button:hover:not(:disabled) {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: inset 0 0 0 0 var(--glow-color), 0 0 2em 0 var(--glow-color);
+        }
+    </style>
+</head>
+<body class="text-gray-200">
+
+    <canvas id="particle-canvas" class="fixed top-0 left-0 w-full h-full z-0 opacity-40"></canvas>
+
+    <div class="relative z-10">
+        <!-- Header Navigation -->
+        <nav class="fixed top-0 left-0 right-0 z-50">
+            <div class="container mx-auto px-4">
+                <div class="glass-card flex items-center justify-between my-4 px-6 py-3 rounded-full">
+                    <a href="./index.html" aria-label="Back to Abhiyantrikotsav Homepage">
+                        <img src="WhatsApp_Image_2025-08-28_at_18.00.19_71f4080f-removebg-preview.png" alt="Abhiyantrikotsav 2k25 Logo" class="h-10 w-auto">
+                    </a>
+                    <a href="./index.html" class="cta-button inline-flex items-center gap-2 bg-transparent font-semibold text-md py-2 px-6 rounded-full">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="transition-transform group-hover:-translate-x-1"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+                        Home
+                    </a>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="container mx-auto px-4 pt-40 pb-24">
+            <header class="text-center mb-16">
+                <h1 class="text-5xl md:text-7xl font-black tracking-tighter uppercase text-amber-400">Food Stalls</h1>
+                <p class="mt-4 text-xl text-amber-200/80 max-w-2xl mx-auto">Taste the Flavors of the Fest.</p>
+            </header>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+                
+                <!-- B.Tech Pani Puri Wallah -->
+                <div class="glass-card flex flex-col">
+                    <img src="btech_ppw.jpg" alt="Pani Puri" class="w-full h-48 object-cover">
+                    <div class="p-6 text-center flex-grow flex flex-col justify-center">
+                        <h3 class="text-2xl font-bold text-white">B.Tech Pani Puri Wallah</h3>
+                    </div>
+                </div>
+
+                <!-- Kadak Bites -->
+                <div class="glass-card flex flex-col">
+                    <img src="kb.jpg" alt="Crispy Snacks" class="w-full h-48 object-cover">
+                    <div class="p-6 text-center flex-grow flex flex-col justify-center">
+                        <h3 class="text-2xl font-bold text-white">Kadak Bites</h3>
+                    </div>
+                </div>
+
+                <!-- Engineer's Bhel -->
+                <div class="glass-card flex flex-col">
+                    <img src="eb.jpg" alt="Bhel Puri" class="w-full h-48 object-cover">
+                    <div class="p-6 text-center flex-grow flex flex-col justify-center">
+                        <h3 class="text-2xl font-bold text-white">Engineer's Bhel</h3>
+                    </div>
+                </div>
+
+                <!-- Miraki -->
+                <div class="glass-card flex flex-col">
+                    <img src="https://placehold.co/400x300/e25822/ffffff?text=Gourmet+Food" alt="Gourmet Food" class="w-full h-48 object-cover">
+                    <div class="p-6 text-center flex-grow flex flex-col justify-center">
+                        <h3 class="text-2xl font-bold text-white">Miraki</h3>
+                    </div>
+                </div>
+
+                <!-- Bihari Special Litti -->
+                <div class="glass-card flex flex-col">
+                    <img src="bsl.jpg" alt="Litti Chokha" class="w-full h-48 object-cover">
+                    <div class="p-6 text-center flex-grow flex flex-col justify-center">
+                        <h3 class="text-2xl font-bold text-white">Bihari Special Litti</h3>
+                    </div>
+                </div>
+
+                <!-- Campus Fresh -->
+                <div class="glass-card flex flex-col">
+                     <img src="cf.jpg" alt="Fresh Juice" class="w-full h-48 object-cover">
+                    <div class="p-6 text-center flex-grow flex flex-col justify-center">
+                        <h3 class="text-2xl font-bold text-white">Campus Fresh</h3>
+                    </div>
+                </div>
+
+                <!-- Spicy Delight -->
+                <div class="glass-card flex flex-col">
+                    <img src="sd.jpg" alt="Spicy Food" class="w-full h-48 object-cover">
+                    <div class="p-6 text-center flex-grow flex flex-col justify-center">
+                        <h3 class="text-2xl font-bold text-white">Spicy Delight</h3>
+                    </div>
+                </div>
+
+                <!-- B.Tech Chai Wala -->
+                <div class="glass-card flex flex-col">
+                    <img src="btech_cw.jpg" alt="Hot Chai" class="w-full h-48 object-cover">
+                    <div class="p-6 text-center flex-grow flex flex-col justify-center">
+                        <h3 class="text-2xl font-bold text-white">B.Tech Chai Wala</h3>
+                    </div>
+                </div>
+
+            </div>
+        </main>
+
+        <!-- Footer -->
+        <footer class="border-t border-slate-700/50 mt-8">
+            <div class="container mx-auto text-center px-6 py-8">
+                <p class="text-gray-500">&copy; 2025 School of Engineering, <br>Central University of Karnataka. All Rights Reserved.<br> Website created and maintained by Vishwaa J, ECE Dept.</p>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        // --- Particle System Logic ---
+        const canvas = document.getElementById('particle-canvas');
+        const ctx = canvas.getContext('2d');
+        let particles = [];
+        let particleCount = window.innerWidth < 768 ? 60 : 100;
+
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            particleCount = window.innerWidth < 768 ? 60 : 100;
+        }
+
+        class Particle {
+            constructor(x, y, size, speedX, speedY) {
+                this.x = x; this.y = y; this.size = size;
+                this.speedX = speedX; this.speedY = speedY;
+            }
+            update() {
+                if (this.x > canvas.width || this.x < 0) this.speedX *= -1;
+                if (this.y > canvas.height || this.y < 0) this.speedY *= -1;
+                this.x += this.speedX; this.y += this.speedY;
+            }
+            draw() {
+                ctx.fillStyle = 'rgba(251, 146, 60, 0.8)';
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fill();
+            }
+        }
+
+        function createParticles() {
+            particles = [];
+            for (let i = 0; i < particleCount; i++) {
+                const size = Math.random() * 1.5 + 1;
+                const x = Math.random() * canvas.width;
+                const y = Math.random() * canvas.height;
+                const speedX = Math.random() * 0.5 - 0.25;
+                const speedY = Math.random() * 0.5 - 0.25;
+                particles.push(new Particle(x, y, size, speedX, speedY));
+            }
+        }
+
+        function animate() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            for (let i = 0; i < particles.length; i++) {
+                particles[i].update();
+                particles[i].draw();
+                for (let j = i; j < particles.length; j++) {
+                    const dx = particles[i].x - particles[j].x;
+                    const dy = particles[i].y - particles[j].y;
+                    const distance = Math.sqrt(dx * dx + dy * dy);
+                    if (distance < 120) {
+                        ctx.beginPath();
+                        ctx.strokeStyle = `rgba(251, 146, 60, ${1 - distance / 120})`;
+                        ctx.lineWidth = 0.5;
+                        ctx.moveTo(particles[i].x, particles[i].y);
+                        ctx.lineTo(particles[j].x, particles[j].y);
+                        ctx.stroke();
+                        ctx.closePath();
+                    }
+                }
+            }
+            requestAnimationFrame(animate);
+        }
+
+        window.addEventListener('resize', () => {
+            resizeCanvas();
+            createParticles();
+        });
+
+        resizeCanvas();
+        createParticles();
+        animate();
+    </script>
+</body>
+</html>
+
